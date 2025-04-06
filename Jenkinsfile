@@ -4,32 +4,37 @@ pipeline {
     stages {
         stage('Build') {
             steps {
-                echo 'Build stage - nothing to compile'
+                echo '🔧 Building the application...'
             }
         }
 
         stage('Test') {
             steps {
-                echo 'Test stage - placeholder for future tests'
+                echo '✅ Running tests...'
             }
         }
 
-        stage('Deploy') {
+        stage('Deploy to Staging') {
             steps {
-                echo 'Deploy stage - serving static HTML'
+                echo '🚀 Deploying to Staging...'
+                bat 'copy index.html staging\\'
+            }
+        }
+
+        stage('Deploy to Production') {
+            steps {
+                echo '🚀 Deploying to Production...'
+                bat 'copy index.html production\\'
             }
         }
     }
-post {
+
+    post {
         success {
-            echo 'Pipeline executed successfully!'
+            echo '🎉 Deployment completed successfully.'
         }
         failure {
-            echo 'Pipeline failed! Please check the logs.'
-        }
-        always {
-            echo 'Pipeline finished running (success or fail).'
+            echo '❌ Deployment failed.'
         }
     }
 }
-
