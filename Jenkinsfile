@@ -17,14 +17,20 @@ pipeline {
         stage('Deploy to Staging') {
             steps {
                 echo '🚀 Deploying to Staging...'
-                bat 'copy index.html staging\\'
+                bat '''
+        	mkdir staging
+        	copy index.html staging\\
+		'''
             }
         }
 
         stage('Deploy to Production') {
             steps {
                 echo '🚀 Deploying to Production...'
-                bat 'copy index.html production\\'
+                bat '''
+        	mkdir production
+        	copy index.html production\\
+		'''
             }
         }
     }
